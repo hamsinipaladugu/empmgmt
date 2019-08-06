@@ -4,25 +4,46 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
 
+import javax.annotation.Generated;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
 
+@Entity
+@Table(name = "employee")
 public class Employee implements Serializable, Comparable<Employee> {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
+	@Column(name="name")
 	private String name;
+	@Column(name="dateofbirth")
 	private LocalDate dateOfBirth;
+	@Column(name="departmentname")
 	private String departmentName;
 
-	public Employee(long id, String name, LocalDate dateOfBirth) {
+	public Employee(long id, String name, LocalDate dateOfBirth, String departmentName) {
+		super();
 		this.id = id;
 		this.name = name;
 		this.dateOfBirth = dateOfBirth;
+		this.departmentName = departmentName;
 	}
 
 	public long getId() {
 		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
 	}
 
 	public String getName() {
@@ -50,19 +71,43 @@ public class Employee implements Serializable, Comparable<Employee> {
 	}
 
 	@Override
-	public boolean equals(Object o) {
-		if (this == o)
+	public boolean equals(Object obj) {
+		if (this == obj)
 			return true;
-		if (o == null || getClass() != o.getClass())
+		if (obj == null)
 			return false;
-		Employee employee = (Employee) o;
-		return id == employee.id && Objects.equals(name, employee.name)
-				&& Objects.equals(dateOfBirth, employee.dateOfBirth);
+		if (getClass() != obj.getClass())
+			return false;
+		Employee other = (Employee) obj;
+		if (dateOfBirth == null) {
+			if (other.dateOfBirth != null)
+				return false;
+		} else if (!dateOfBirth.equals(other.dateOfBirth))
+			return false;
+		if (departmentName == null) {
+			if (other.departmentName != null)
+				return false;
+		} else if (!departmentName.equals(other.departmentName))
+			return false;
+		if (id != other.id)
+			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		return true;
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(id, name, dateOfBirth);
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((dateOfBirth == null) ? 0 : dateOfBirth.hashCode());
+		result = prime * result + ((departmentName == null) ? 0 : departmentName.hashCode());
+		result = prime * result + (int) (id ^ (id >>> 32));
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		return result;
 	}
 
 	public int compareTo(Employee employee) {
