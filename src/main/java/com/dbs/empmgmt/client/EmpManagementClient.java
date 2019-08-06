@@ -1,6 +1,7 @@
 package com.dbs.empmgmt.client;
 
 import com.dbs.empmgmt.controller.EmployeeController;
+import com.dbs.empmgmt.model.BankAccount;
 import com.dbs.empmgmt.model.Employee;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -13,8 +14,8 @@ public class EmpManagementClient {
 	public static void main(String[] args) {
 		ApplicationContext applicationContext = new ClassPathXmlApplicationContext("beans.xml");
 		employeeController = applicationContext.getBean(EmployeeController.class);
-		//saveEmployees();
-		listAllEmployees();
+		saveEmployees();
+		//listAllEmployees();
 		//fetchEmployeeDetailsById(12);
 	}
 
@@ -27,11 +28,21 @@ public class EmpManagementClient {
     }
 
 	private static void saveEmployees() {
-		Employee employee = new Employee(12, "Harish", LocalDate.of(1985, 5, 25), "MOT");
+		Employee employee = new Employee("Harish", LocalDate.of(1985, 5, 25), "MOT");
+		BankAccount account1 = new BankAccount();
+	    account1.setPan("AOY45GG88M");
+	    account1.setAccountBalance(5_000);
+	    BankAccount account2 = new BankAccount();
+	    account2.setPan("AOY45GG88N");
+	    account2.setAccountBalance(15_000);
+
+	    employee.addBankAccount(account1);
+	    employee.addBankAccount(account2);
 		employeeController.saveEmployee(employee);
-		employee = new Employee(15, "VInayak", LocalDate.of(1985, 6, 18), "C2E");
-		employeeController.saveEmployee(employee);
-		employee = new Employee(12, "Harish", LocalDate.of(1981, 3, 25), "IBGT");
-		employeeController.saveEmployee(employee);
+		
+		
 	}
 }
+
+    
+

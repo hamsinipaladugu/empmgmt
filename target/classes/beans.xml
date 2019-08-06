@@ -35,10 +35,11 @@
 		<property name="driverClassName" value="org.h2.Driver" />
 	</bean>
 
-	<jdbc:embedded-database id="emp_db" type="H2">
+	<!--<jdbc:embedded-database id="emp_db" type="H2">
 		<jdbc:script location="classpath:schema.sql" />
 		<jdbc:script location="classpath:data.sql" />
 	</jdbc:embedded-database>
+	-->
 
 	<!--<bean depends-on="emp_db"
 		class="org.springframework.beans.factory.config.MethodInvokingBean">
@@ -78,7 +79,7 @@
 				<prop key="hibernate.dialect">org.hibernate.dialect.MySQL57Dialect</prop>
 				<prop key="hibernate.show_sql">true</prop>
 				<prop key="format_sql">true</prop>
-				<prop key="hibernate.hbm2ddl.auto">update</prop>
+				<prop key="hibernate.hbm2ddl.auto">create</prop>
 			</props>
 		</property>
 	</bean>

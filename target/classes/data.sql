@@ -1,4 +1,4 @@
-insert into EMPLOYEE (id, name, dateofbirth, department) values
+insert into EMPLOYEE (id, name, dateofbirth, departmentname) values
      (1, 'Ramesh', '1987-05-23', 'HR'),
      (2, 'Siri', '1999-04-21', 'FINANCE'),
      (3, 'Suresh', '1983-05-18', 'PAYROLL'),

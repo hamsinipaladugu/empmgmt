@@ -33,14 +33,14 @@ public class H2EmployeeDAOImpl implements EmployeeDAO {
     @Override
     public List<Employee> findAll() {
         String fetchAllQuery = "select * from employee";
-        List<Employee>empList = this.jdbcTemplate.query(fetchAllQuery, (resultSet,num) -> new Employee(resultSet.getLong("id"), resultSet.getString("name"), resultSet.getDate("dateofbirth").toLocalDate(), resultSet.getString("department")));
+        List<Employee>empList = this.jdbcTemplate.query(fetchAllQuery, (resultSet,num) -> new Employee(resultSet.getString("name"), resultSet.getDate("dateofbirth").toLocalDate(), resultSet.getString("department")));
         return empList;
     }
 
     @Override
     public Employee findById(long id) {
     	String query = "select * from employee where id = " + id;
-        Employee employee = this.jdbcTemplate.queryForObject(query, (resultSet, i) -> new Employee( resultSet.getLong("id"), resultSet.getString("name"), resultSet.getDate("dateofbirth").toLocalDate(), resultSet.getString("department")));
+        Employee employee = this.jdbcTemplate.queryForObject(query, (resultSet, i) -> new Employee( resultSet.getString("name"), resultSet.getDate("dateofbirth").toLocalDate(), resultSet.getString("department")));
         return employee;
     }
 
